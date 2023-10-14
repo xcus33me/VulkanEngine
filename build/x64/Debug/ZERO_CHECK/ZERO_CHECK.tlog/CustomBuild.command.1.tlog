@@ -1,0 +1,10 @@
+^D:\VENGINE\BUILD\CMAKEFILES\74982127904A84C3541D0CEA0CE8D2B3\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/vEngine -BD:/vEngine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/vEngine/build/vEngine.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
