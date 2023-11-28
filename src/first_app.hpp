@@ -11,7 +11,7 @@ namespace lve {
 
 		void run();
 	private:
-		LveWindow lveWindow { WIDTH, HEIGHT, "Hello Vulkan!" };
+		LveWindow lveWindow { WIDTH, HEIGHT, "Sandbox" };
 		LveDevice lveDevice {lveWindow};
 		LvePipeline LvePipeline {
 			lveDevice,
