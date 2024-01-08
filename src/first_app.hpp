@@ -1,22 +1,22 @@
 #pragma once
 
-#include "lve_window.hpp"
-#include "lve_pipeline.hpp"
+#include "vue_window.hpp"
+#include "vue_pipeline.hpp"
 
-namespace lve {
+namespace vue {
 	class FirstApp {
 	public:
-		static constexpr int WIDTH = 800;
-		static constexpr int HEIGHT = 600;
+		static constexpr int WIDTH = 1600;
+		static constexpr int HEIGHT = 900;
 
 		void run();
 	private:
-		LveWindow lveWindow { WIDTH, HEIGHT, "Sandbox" };
-		LveDevice lveDevice {lveWindow};
-		LvePipeline LvePipeline {
-			lveDevice,
+		VueWindow VueWindow { WIDTH, HEIGHT, "Sandbox" };
+		VueDevice VueDevice {VueWindow};
+		VuePipeline VuePipeline {
+			VueDevice,
 			"../shaders/simple_shader.vert.spv",
 			"../shaders/simple_shader.frag.spv",
-			LvePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
+			VuePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
 	};
 }

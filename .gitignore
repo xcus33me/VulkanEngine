@@ -1,3 +1,5 @@
 /.vs/
 /build/
 /.vscode/
+/.idea/
+/cmake-build-debug/

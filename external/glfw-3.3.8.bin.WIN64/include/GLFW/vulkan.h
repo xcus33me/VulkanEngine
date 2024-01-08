@@ -1286,8 +1286,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES = 1000161002,
     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO = 1000161003,
     VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT = 1000161004,
-    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES = 1000199000,
-    VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE = 1000199001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOVue_PROPERTIES = 1000199000,
+    VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOVue = 1000199001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES = 1000221000,
     VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO = 1000246000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES = 1000130000,
@@ -1339,12 +1339,12 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2 = 1000337002,
     VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2 = 1000337003,
     VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 = 1000337004,
-    VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2 = 1000337005,
+    VK_STRUCTURE_TYPE_RESOVue_IMAGE_INFO_2 = 1000337005,
     VK_STRUCTURE_TYPE_BUFFER_COPY_2 = 1000337006,
     VK_STRUCTURE_TYPE_IMAGE_COPY_2 = 1000337007,
     VK_STRUCTURE_TYPE_IMAGE_BLIT_2 = 1000337008,
     VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 = 1000337009,
-    VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2 = 1000337010,
+    VK_STRUCTURE_TYPE_IMAGE_RESOVue_2 = 1000337010,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES = 1000225000,
     VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO = 1000225001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES = 1000225002,
@@ -1513,14 +1513,14 @@ typedef enum VkPointClippingBehavior {
     VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY = 1,
     VK_POINT_CLIPPING_BEHAVIOR_MAX_ENUM = 0x7FFFFFFF
 } VkPointClippingBehavior;
-typedef enum VkResolveModeFlagBits {
-    VK_RESOLVE_MODE_NONE = 0,
-    VK_RESOLVE_MODE_SAMPLE_ZERO_BIT = 1,
-    VK_RESOLVE_MODE_AVERAGE_BIT = 2,
-    VK_RESOLVE_MODE_MIN_BIT = 4,
-    VK_RESOLVE_MODE_MAX_BIT = 8,
-    VK_RESOLVE_MODE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
-} VkResolveModeFlagBits;
+typedef enum VkResoVueModeFlagBits {
+    VK_RESOVue_MODE_NONE = 0,
+    VK_RESOVue_MODE_SAMPLE_ZERO_BIT = 1,
+    VK_RESOVue_MODE_AVERAGE_BIT = 2,
+    VK_RESOVue_MODE_MIN_BIT = 4,
+    VK_RESOVue_MODE_MAX_BIT = 8,
+    VK_RESOVue_MODE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+} VkResoVueModeFlagBits;
 typedef enum VkDescriptorBindingFlagBits {
     VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT = 1,
     VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT = 2,
@@ -1644,8 +1644,8 @@ static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT = 655
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR = 65536;
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_COPY_BIT = 4294967296;
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_COPY_BIT_KHR = 4294967296;
-static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_RESOLVE_BIT = 8589934592;
-static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR = 8589934592;
+static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_RESOVue_BIT = 8589934592;
+static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_RESOVue_BIT_KHR = 8589934592;
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_BLIT_BIT = 17179869184;
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_BLIT_BIT_KHR = 17179869184;
 static const VkPipelineStageFlagBits2 VK_PIPELINE_STAGE_2_CLEAR_BIT = 34359738368;
@@ -2592,9 +2592,9 @@ typedef struct VkRenderingAttachmentInfo {
     const  void *                                                 pNext;
     VkImageView                                                  imageView;
     VkImageLayout                                                                imageLayout;
-    VkResolveModeFlagBits                                        resolveMode;
-    VkImageView                                                  resolveImageView;
-    VkImageLayout                                                                resolveImageLayout;
+    VkResoVueModeFlagBits                                        resoVueMode;
+    VkImageView                                                  resoVueImageView;
+    VkImageLayout                                                                resoVueImageLayout;
     VkAttachmentLoadOp                                                           loadOp;
     VkAttachmentStoreOp                                                          storeOp;
     VkClearValue                                                                 clearValue;
@@ -2690,7 +2690,7 @@ typedef VkFlags VkExternalFenceHandleTypeFlags;
 typedef VkFlags VkExternalFenceFeatureFlags;
 typedef VkFlags VkFenceImportFlags;
 typedef VkFlags VkDescriptorBindingFlags;
-typedef VkFlags VkResolveModeFlags;
+typedef VkFlags VkResoVueModeFlags;
 typedef VkFlags VkToolPurposeFlags;
 typedef VkFlags VkSubmitFlags;
 typedef VkBool32 (VKAPI_PTR *PFN_vkDebugReportCallbackEXT)(
@@ -2998,13 +2998,13 @@ typedef struct VkBufferImageCopy {
     VkExtent3D               imageExtent;
 } VkBufferImageCopy;
 
-typedef struct VkImageResolve {
+typedef struct VkImageResoVue {
     VkImageSubresourceLayers   srcSubresource;
     VkOffset3D               srcOffset;
     VkImageSubresourceLayers   dstSubresource;
     VkOffset3D               dstOffset;
     VkExtent3D               extent;
-} VkImageResolve;
+} VkImageResoVue;
 
 typedef struct VkShaderModuleCreateInfo {
     VkStructureType   sType;
@@ -3294,7 +3294,7 @@ typedef struct VkSubpassDescription {
     const  VkAttachmentReference *  pInputAttachments;
     uint32_t                 colorAttachmentCount;
     const  VkAttachmentReference *  pColorAttachments;
-    const  VkAttachmentReference *  pResolveAttachments;
+    const  VkAttachmentReference *  pResoVueAttachments;
     const  VkAttachmentReference *  pDepthStencilAttachment;
     uint32_t                 preserveAttachmentCount;
     const  uint32_t *  pPreserveAttachments;
@@ -4102,7 +4102,7 @@ typedef struct VkSubpassDescription2 {
     const  VkAttachmentReference2 *     pInputAttachments;
     uint32_t                                      colorAttachmentCount;
     const  VkAttachmentReference2 *     pColorAttachments;
-    const  VkAttachmentReference2 *  pResolveAttachments;
+    const  VkAttachmentReference2 *  pResoVueAttachments;
     const  VkAttachmentReference2 *                pDepthStencilAttachment;
     uint32_t                                      preserveAttachmentCount;
     const  uint32_t *                pPreserveAttachments;
@@ -4173,22 +4173,22 @@ typedef struct VkPhysicalDeviceShaderAtomicInt64Features {
     VkBool32                              shaderSharedInt64Atomics;
 } VkPhysicalDeviceShaderAtomicInt64Features;
 
-typedef struct VkPhysicalDeviceDepthStencilResolveProperties {
+typedef struct VkPhysicalDeviceDepthStencilResoVueProperties {
     VkStructureType   sType;
     void *                                 pNext;
-    VkResolveModeFlags                     supportedDepthResolveModes;
-    VkResolveModeFlags                     supportedStencilResolveModes;
-    VkBool32                               independentResolveNone;
-    VkBool32                               independentResolve;
-} VkPhysicalDeviceDepthStencilResolveProperties;
+    VkResoVueModeFlags                     supportedDepthResoVueModes;
+    VkResoVueModeFlags                     supportedStencilResoVueModes;
+    VkBool32                               independentResoVueNone;
+    VkBool32                               independentResoVue;
+} VkPhysicalDeviceDepthStencilResoVueProperties;
 
-typedef struct VkSubpassDescriptionDepthStencilResolve {
+typedef struct VkSubpassDescriptionDepthStencilResoVue {
     VkStructureType   sType;
     const  void *                               pNext;
-    VkResolveModeFlagBits                depthResolveMode;
-    VkResolveModeFlagBits                stencilResolveMode;
-    const  VkAttachmentReference2 *             pDepthStencilResolveAttachment;
-} VkSubpassDescriptionDepthStencilResolve;
+    VkResoVueModeFlagBits                depthResoVueMode;
+    VkResoVueModeFlagBits                stencilResoVueMode;
+    const  VkAttachmentReference2 *             pDepthStencilResoVueAttachment;
+} VkSubpassDescriptionDepthStencilResoVue;
 
 typedef struct VkImageStencilUsageCreateInfo {
     VkStructureType   sType;
@@ -4432,10 +4432,10 @@ typedef struct VkPhysicalDeviceVulkan12Properties {
     uint32_t                           maxDescriptorSetUpdateAfterBindSampledImages;
     uint32_t                           maxDescriptorSetUpdateAfterBindStorageImages;
     uint32_t                           maxDescriptorSetUpdateAfterBindInputAttachments;
-    VkResolveModeFlags                 supportedDepthResolveModes;
-    VkResolveModeFlags                 supportedStencilResolveModes;
-    VkBool32                           independentResolveNone;
-    VkBool32                           independentResolve;
+    VkResoVueModeFlags                 supportedDepthResoVueModes;
+    VkResoVueModeFlags                 supportedStencilResoVueModes;
+    VkBool32                           independentResoVueNone;
+    VkBool32                           independentResoVue;
     VkBool32                           filterMinmaxSingleComponentFormats;
     VkBool32                           filterMinmaxImageComponentMapping;
     uint64_t                           maxTimelineSemaphoreValueDifference;
@@ -4572,7 +4572,7 @@ typedef struct VkBufferImageCopy2 {
     VkExtent3D                           imageExtent;
 } VkBufferImageCopy2;
 
-typedef struct VkImageResolve2 {
+typedef struct VkImageResoVue2 {
     VkStructureType   sType;
     const  void *         pNext;
     VkImageSubresourceLayers             srcSubresource;
@@ -4580,7 +4580,7 @@ typedef struct VkImageResolve2 {
     VkImageSubresourceLayers             dstSubresource;
     VkOffset3D                           dstOffset;
     VkExtent3D                           extent;
-} VkImageResolve2;
+} VkImageResoVue2;
 
 typedef struct VkCopyBufferInfo2 {
     VkStructureType   sType;
@@ -4634,7 +4634,7 @@ typedef struct VkCopyImageToBufferInfo2 {
     const  VkBufferImageCopy2 *    pRegions;
 } VkCopyImageToBufferInfo2;
 
-typedef struct VkResolveImageInfo2 {
+typedef struct VkResoVueImageInfo2 {
     VkStructureType   sType;
     const  void *                 pNext;
     VkImage                                      srcImage;
@@ -4642,8 +4642,8 @@ typedef struct VkResolveImageInfo2 {
     VkImage                                      dstImage;
     VkImageLayout                                dstImageLayout;
     uint32_t                                     regionCount;
-    const  VkImageResolve2 *    pRegions;
-} VkResolveImageInfo2;
+    const  VkImageResoVue2 *    pRegions;
+} VkResoVueImageInfo2;
 
 typedef struct VkPhysicalDeviceShaderTerminateInvocationFeatures {
     VkStructureType sType;
@@ -4935,8 +4935,8 @@ typedef void (GLAD_API_PTR *PFN_vkCmdPushConstants)(VkCommandBuffer commandBuffe
 typedef void (GLAD_API_PTR *PFN_vkCmdResetEvent)(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags stageMask);
 typedef void (GLAD_API_PTR *PFN_vkCmdResetEvent2)(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags2 stageMask);
 typedef void (GLAD_API_PTR *PFN_vkCmdResetQueryPool)(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount);
-typedef void (GLAD_API_PTR *PFN_vkCmdResolveImage)(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const VkImageResolve * pRegions);
-typedef void (GLAD_API_PTR *PFN_vkCmdResolveImage2)(VkCommandBuffer commandBuffer, const VkResolveImageInfo2 * pResolveImageInfo);
+typedef void (GLAD_API_PTR *PFN_vkCmdResoVueImage)(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const VkImageResoVue * pRegions);
+typedef void (GLAD_API_PTR *PFN_vkCmdResoVueImage2)(VkCommandBuffer commandBuffer, const VkResoVueImageInfo2 * pResoVueImageInfo);
 typedef void (GLAD_API_PTR *PFN_vkCmdSetBlendConstants)(VkCommandBuffer commandBuffer, const float blendConstants [4]);
 typedef void (GLAD_API_PTR *PFN_vkCmdSetCullMode)(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode);
 typedef void (GLAD_API_PTR *PFN_vkCmdSetDepthBias)(VkCommandBuffer commandBuffer, float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor);
@@ -5224,10 +5224,10 @@ GLAD_API_CALL PFN_vkCmdResetEvent2 glad_vkCmdResetEvent2;
 #define vkCmdResetEvent2 glad_vkCmdResetEvent2
 GLAD_API_CALL PFN_vkCmdResetQueryPool glad_vkCmdResetQueryPool;
 #define vkCmdResetQueryPool glad_vkCmdResetQueryPool
-GLAD_API_CALL PFN_vkCmdResolveImage glad_vkCmdResolveImage;
-#define vkCmdResolveImage glad_vkCmdResolveImage
-GLAD_API_CALL PFN_vkCmdResolveImage2 glad_vkCmdResolveImage2;
-#define vkCmdResolveImage2 glad_vkCmdResolveImage2
+GLAD_API_CALL PFN_vkCmdResoVueImage glad_vkCmdResoVueImage;
+#define vkCmdResoVueImage glad_vkCmdResoVueImage
+GLAD_API_CALL PFN_vkCmdResoVueImage2 glad_vkCmdResoVueImage2;
+#define vkCmdResoVueImage2 glad_vkCmdResoVueImage2
 GLAD_API_CALL PFN_vkCmdSetBlendConstants glad_vkCmdSetBlendConstants;
 #define vkCmdSetBlendConstants glad_vkCmdSetBlendConstants
 GLAD_API_CALL PFN_vkCmdSetCullMode glad_vkCmdSetCullMode;
@@ -5681,8 +5681,8 @@ PFN_vkCmdPushConstants glad_vkCmdPushConstants = NULL;
 PFN_vkCmdResetEvent glad_vkCmdResetEvent = NULL;
 PFN_vkCmdResetEvent2 glad_vkCmdResetEvent2 = NULL;
 PFN_vkCmdResetQueryPool glad_vkCmdResetQueryPool = NULL;
-PFN_vkCmdResolveImage glad_vkCmdResolveImage = NULL;
-PFN_vkCmdResolveImage2 glad_vkCmdResolveImage2 = NULL;
+PFN_vkCmdResoVueImage glad_vkCmdResoVueImage = NULL;
+PFN_vkCmdResoVueImage2 glad_vkCmdResoVueImage2 = NULL;
 PFN_vkCmdSetBlendConstants glad_vkCmdSetBlendConstants = NULL;
 PFN_vkCmdSetCullMode glad_vkCmdSetCullMode = NULL;
 PFN_vkCmdSetDepthBias glad_vkCmdSetDepthBias = NULL;
@@ -5897,7 +5897,7 @@ static void glad_vk_load_VK_VERSION_1_0( GLADuserptrloadfunc load, void* userptr
     glad_vkCmdPushConstants = (PFN_vkCmdPushConstants) load(userptr, "vkCmdPushConstants");
     glad_vkCmdResetEvent = (PFN_vkCmdResetEvent) load(userptr, "vkCmdResetEvent");
     glad_vkCmdResetQueryPool = (PFN_vkCmdResetQueryPool) load(userptr, "vkCmdResetQueryPool");
-    glad_vkCmdResolveImage = (PFN_vkCmdResolveImage) load(userptr, "vkCmdResolveImage");
+    glad_vkCmdResoVueImage = (PFN_vkCmdResoVueImage) load(userptr, "vkCmdResoVueImage");
     glad_vkCmdSetBlendConstants = (PFN_vkCmdSetBlendConstants) load(userptr, "vkCmdSetBlendConstants");
     glad_vkCmdSetDepthBias = (PFN_vkCmdSetDepthBias) load(userptr, "vkCmdSetDepthBias");
     glad_vkCmdSetDepthBounds = (PFN_vkCmdSetDepthBounds) load(userptr, "vkCmdSetDepthBounds");
@@ -6058,7 +6058,7 @@ static void glad_vk_load_VK_VERSION_1_3( GLADuserptrloadfunc load, void* userptr
     glad_vkCmdEndRendering = (PFN_vkCmdEndRendering) load(userptr, "vkCmdEndRendering");
     glad_vkCmdPipelineBarrier2 = (PFN_vkCmdPipelineBarrier2) load(userptr, "vkCmdPipelineBarrier2");
     glad_vkCmdResetEvent2 = (PFN_vkCmdResetEvent2) load(userptr, "vkCmdResetEvent2");
-    glad_vkCmdResolveImage2 = (PFN_vkCmdResolveImage2) load(userptr, "vkCmdResolveImage2");
+    glad_vkCmdResoVueImage2 = (PFN_vkCmdResoVueImage2) load(userptr, "vkCmdResoVueImage2");
     glad_vkCmdSetCullMode = (PFN_vkCmdSetCullMode) load(userptr, "vkCmdSetCullMode");
     glad_vkCmdSetDepthBiasEnable = (PFN_vkCmdSetDepthBiasEnable) load(userptr, "vkCmdSetDepthBiasEnable");
     glad_vkCmdSetDepthBoundsTestEnable = (PFN_vkCmdSetDepthBoundsTestEnable) load(userptr, "vkCmdSetDepthBoundsTestEnable");

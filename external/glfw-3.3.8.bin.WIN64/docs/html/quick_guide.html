@@ -332,10 +332,10 @@ Putting it together</h1>
 <div class="line">    vcol_location = glGetAttribLocation(program, <span class="stringliteral">&quot;vCol&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    glEnableVertexAttribArray(vpos_location);</div>
-<div class="line">    glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,</div>
+<div class="line">    gVuertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,</div>
 <div class="line">                          <span class="keyword">sizeof</span>(vertices[0]), (<span class="keywordtype">void</span>*) 0);</div>
 <div class="line">    glEnableVertexAttribArray(vcol_location);</div>
-<div class="line">    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,</div>
+<div class="line">    gVuertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,</div>
 <div class="line">                          <span class="keyword">sizeof</span>(vertices[0]), (<span class="keywordtype">void</span>*) (<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>) * 2));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">while</span> (!<a class="code hl_function" href="group__window.html#ga24e02fbfefbb81fc45320989f8140ab5">glfwWindowShouldClose</a>(window))</div>

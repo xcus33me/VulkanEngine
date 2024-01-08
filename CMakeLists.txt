@@ -3,7 +3,7 @@ message(STATUS "Local .env.cmake: ${LOCAL_ENV}")
 
 cmake_minimum_required(VERSION 3.11.0)
 
-set(NAME vEngine)
+set(NAME vueEngine)
 
 project(${NAME} VERSION 0.1.0)
 

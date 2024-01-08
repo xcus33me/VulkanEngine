@@ -5,7 +5,7 @@
 
 int main() {
 
-	lve::FirstApp app{};
+	vue::FirstApp app{};
 	try {
 		app.run();
 	}

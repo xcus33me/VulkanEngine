@@ -5,15 +5,15 @@
 
 #include <string>
 
-namespace lve {
+namespace vue {
 
-	class LveWindow {
+	class VueWindow {
 	public:
-		LveWindow(int w, int h, std::string name);
-		~LveWindow();
+		VueWindow(int w, int h, std::string name);
+		~VueWindow();
 
-		LveWindow(const LveWindow&) = delete;
-		LveWindow &operator=(const LveWindow&) = delete;
+		VueWindow(const VueWindow&) = delete;
+		VueWindow &operator=(const VueWindow&) = delete;
 
 		bool shouldClose() { return glfwWindowShouldClose(window); }
 

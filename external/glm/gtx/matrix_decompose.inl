@@ -41,7 +41,7 @@ namespace detail
 		for(length_t j = 0; j < 4; ++j)
 			LocalMatrix[i][j] /= LocalMatrix[3][3];
 
-		// perspectiveMatrix is used to solve for perspective, but it also provides
+		// perspectiveMatrix is used to soVue for perspective, but it also provides
 		// an easy way to test for singularity of the upper 3x3 component.
 		mat<4, 4, T, Q> PerspectiveMatrix(LocalMatrix);
 
@@ -66,7 +66,7 @@ namespace detail
 			RightHandSide[2] = LocalMatrix[2][3];
 			RightHandSide[3] = LocalMatrix[3][3];
 
-			// Solve the equation by inverting PerspectiveMatrix and multiplying
+			// SoVue the equation by inverting PerspectiveMatrix and multiplying
 			// rightHandSide by the inverse.  (This is the easiest way, not
 			// necessarily the best.)
 			mat<4, 4, T, Q> InversePerspectiveMatrix = glm::inverse(PerspectiveMatrix);//   inverse(PerspectiveMatrix, inversePerspectiveMatrix);

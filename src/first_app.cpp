@@ -1,11 +1,11 @@
 #include "first_app.hpp"
 
-namespace lve{
+namespace vue{
 
 	void FirstApp::run() {
 
 
-		while (!lveWindow.shouldClose()) {
+		while (!VueWindow.shouldClose()) {
 			glfwPollEvents();
 		}
 	}
