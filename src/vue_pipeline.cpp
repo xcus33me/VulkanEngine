@@ -3,6 +3,7 @@
 #include <fstream>
 #include <exception>
 #include <iostream>
+#include <cassert>
 
 #ifndef ENGINE_DIR
 #define ENGINE_DIR "../"
@@ -18,6 +19,12 @@ namespace vue {
          : vueDevice{device} {
             createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
         }
+
+    VuePipeline::~VuePipeline() {
+        vkDestroyShaderModule(vueDevice.device(), vertShaderModule, nullptr);
+        vkDestroyShaderModule(vueDevice.device(), fragShaderModule, nullptr);
+        vkDestroyPipeline(vueDevice.device(), graphicsPipeline, nullptr);
+    }
 
     std::vector<char> VuePipeline::readFile(const std::string& filepath) {
         std::string enginePath = ENGINE_DIR + filepath;
@@ -37,9 +44,17 @@ namespace vue {
     }
 
     void VuePipeline::createGraphicsPipeline(
-                const std::string vertFilepath, 
-                const std::string fragFilepath,
-                const PipelineConfigInfo& configInfo) {
+            const std::string vertFilepath, 
+            const std::string fragFilepath,
+            const PipelineConfigInfo& configInfo) {
+
+        assert(
+            configInfo.pipelineLayout != VK_NULL_HANDLE && 
+            "Cannot create graphics pipeline:: no pipelineLayout provided in configInfo");
+        assert(
+            configInfo.renderPass != VK_NULL_HANDLE && 
+            "Cannot create graphics pipeline:: no renderPass provided in configInfo");
+
         auto vertCode = readFile(vertFilepath);
         auto fragCode = readFile(fragFilepath);
 
@@ -78,6 +93,8 @@ namespace vue {
         pipelineInfo.pInputAssemblyState = &configInfo.inputAssemblyInfo;
         pipelineInfo.pViewportState = &configInfo.viewportInfo;
         pipelineInfo.pRasterizationState = &configInfo.rasterizationInfo;
+        pipelineInfo.pMultisampleState = &configInfo.multisampleInfo;
+
         pipelineInfo.pColorBlendState = &configInfo.colorBlendInfo;
         pipelineInfo.pDepthStencilState = &configInfo.depthStencilInfo;
         pipelineInfo.pDynamicState = nullptr;
