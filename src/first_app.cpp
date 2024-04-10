@@ -3,9 +3,7 @@
 namespace vue{
 
 	void FirstApp::run() {
-
-
-		while (!VueWindow.shouldClose()) {
+		while (!this->vueWindow.shouldClose()) {
 			glfwPollEvents();
 		}
 	}
