@@ -1,5 +1,8 @@
 # VulkanEngine
 Simple educational 3D engine based on VulkanAPI
+
+## Available features
+* no features for now :(
 ___
 ## Building
 ### For windows:
@@ -11,3 +14,5 @@ ___
 ### For Linux:
 - Delete .env.cmake file
 - Use "./linuxBuild.sh to build the project
+___
+
