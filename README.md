@@ -13,6 +13,6 @@ ___
 
 ### For Linux:
 - Delete .env.cmake file
-- Use "./linuxBuild.sh to build the project
+- Use ```./linuxBuild.sh``` to build the project
 ___
 
