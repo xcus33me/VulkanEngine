@@ -1,5 +1,5 @@
 # VulkanEngine
-Simple educational 3D engine based on VulkanAPI
+Simple educational 3D game engine based on VulkanAPI
 
 ## Available features
 * no features for now :(
