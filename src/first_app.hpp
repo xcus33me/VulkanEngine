@@ -1,7 +1,9 @@
 #pragma once
 
-#include "vue_window.hpp"
+#include "vue_device.hpp"
 #include "vue_pipeline.hpp"
+#include "vue_window.hpp"
+#include "vue_swap_chain.hpp"
 
 namespace vue {
 	class FirstApp {
@@ -11,10 +13,11 @@ namespace vue {
 
 		void run();
 	private:
-		VueWindow VueWindow { WIDTH, HEIGHT, "Sandbox" };
-		VueDevice VueDevice {VueWindow};
+		VueWindow vueWindow { WIDTH, HEIGHT, "Sandbox" };
+		VueDevice vueDevice {vueWindow};
+		VueSwapChain vueSwapChain{vueDevice, vueWindow.getExtent()};
 		VuePipeline VuePipeline {
-			VueDevice,
+			vueDevice,
 			"../shaders/simple_shader.vert.spv",
 			"../shaders/simple_shader.frag.spv",
 			VuePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};

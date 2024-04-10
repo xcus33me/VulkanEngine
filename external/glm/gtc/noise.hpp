@@ -11,7 +11,7 @@
 /// Defines 2D, 3D and 4D procedural noise functions
 /// Based on the work of Stefan Gustavson and Ashima Arts on "webgl-noise":
 /// https://github.com/ashima/webgl-noise
-/// Following Stefan Gustavson's paper "Simplex noise demystified":
+/// Following Stefan Gustavson's paper "Simplex noise deVuestified":
 /// http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 
 #pragma once

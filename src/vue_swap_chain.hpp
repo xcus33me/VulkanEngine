@@ -5,11 +5,11 @@
 // vulkan headers
 #include <vulkan/vulkan.h>
 
-// std lib headers
+// std
 #include <string>
 #include <vector>
 
-namespace lve {
+namespace vue {
 
 class VueSwapChain {
 public:

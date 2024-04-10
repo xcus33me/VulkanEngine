@@ -141,11 +141,11 @@ With CMake and GLFW source</h2>
 </div><!-- fragment --><p >Add the root directory of the GLFW source tree to your project. This will add the <code>glfw</code> target to your project.</p>
 <div class="fragment"><div class="line">add_subdirectory(path/to/glfw)</div>
 </div><!-- fragment --><p >Once GLFW has been added, link your application against the <code>glfw</code> target. This adds the GLFW library and its link-time dependencies as it is currently configured, the include directory for the GLFW header and, when applicable, the <a class="el" href="build_guide.html#GLFW_DLL">GLFW_DLL</a> macro.</p>
-<div class="fragment"><div class="line">target_link_libraries(myapp glfw)</div>
+<div class="fragment"><div class="line">target_link_libraries(Vueapp glfw)</div>
 </div><!-- fragment --><p >Note that the <code>glfw</code> target does not depend on OpenGL, as GLFW loads any OpenGL, OpenGL ES or Vulkan libraries it needs at runtime. If your application calls OpenGL directly, instead of using a modern <a class="el" href="context_guide.html#context_glext_auto">extension loader library</a>, use the OpenGL CMake package.</p>
 <div class="fragment"><div class="line">find_package(OpenGL REQUIRED)</div>
 </div><!-- fragment --><p >If OpenGL is found, the <code>OpenGL::GL</code> target is added to your project, containing library and include directory paths. Link against this like any other library.</p>
-<div class="fragment"><div class="line">target_link_libraries(myapp OpenGL::GL)</div>
+<div class="fragment"><div class="line">target_link_libraries(Vueapp OpenGL::GL)</div>
 </div><!-- fragment --><p >For a minimal example of a program and GLFW sources built with CMake, see the <a href="https://github.com/juliettef/GLFW-CMake-starter">GLFW CMake Starter</a> on GitHub.</p>
 <h2><a class="anchor" id="build_link_cmake_package"></a>
 With CMake and installed GLFW binaries</h2>
@@ -153,22 +153,22 @@ With CMake and installed GLFW binaries</h2>
 <p >With a few changes to your <code>CMakeLists.txt</code> you can locate the package and target files generated when GLFW is installed.</p>
 <div class="fragment"><div class="line">find_package(glfw3 3.3 REQUIRED)</div>
 </div><!-- fragment --><p >Once GLFW has been added to the project, link against it with the <code>glfw</code> target. This adds the GLFW library and its link-time dependencies, the include directory for the GLFW header and, when applicable, the <a class="el" href="build_guide.html#GLFW_DLL">GLFW_DLL</a> macro.</p>
-<div class="fragment"><div class="line">target_link_libraries(myapp glfw)</div>
+<div class="fragment"><div class="line">target_link_libraries(Vueapp glfw)</div>
 </div><!-- fragment --><p >Note that the <code>glfw</code> target does not depend on OpenGL, as GLFW loads any OpenGL, OpenGL ES or Vulkan libraries it needs at runtime. If your application calls OpenGL directly, instead of using a modern <a class="el" href="context_guide.html#context_glext_auto">extension loader library</a>, use the OpenGL CMake package.</p>
 <div class="fragment"><div class="line">find_package(OpenGL REQUIRED)</div>
 </div><!-- fragment --><p >If OpenGL is found, the <code>OpenGL::GL</code> target is added to your project, containing library and include directory paths. Link against this like any other library.</p>
-<div class="fragment"><div class="line">target_link_libraries(myapp OpenGL::GL)</div>
+<div class="fragment"><div class="line">target_link_libraries(Vueapp OpenGL::GL)</div>
 </div><!-- fragment --><h2><a class="anchor" id="build_link_pkgconfig"></a>
 With makefiles and pkg-config on Unix</h2>
 <p >GLFW supports <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>, and the <code>glfw3.pc</code> pkg-config file is generated when the GLFW library is built and is installed along with it. A pkg-config file describes all necessary compile-time and link-time flags and dependencies needed to use a library. When they are updated or if they differ between systems, you will get the correct ones automatically.</p>
 <p >A typical compile and link command-line when using the static version of the GLFW library may look like this:</p>
-<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3) -o myprog myprog.c $(pkg-config --static --libs glfw3)</div>
+<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3) -o Vueprog Vueprog.c $(pkg-config --static --libs glfw3)</div>
 </div><!-- fragment --><p >If you are using the shared version of the GLFW library, omit the <code>--static</code> flag.</p>
-<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3) -o myprog myprog.c $(pkg-config --libs glfw3)</div>
+<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3) -o Vueprog Vueprog.c $(pkg-config --libs glfw3)</div>
 </div><!-- fragment --><p >You can also use the <code>glfw3.pc</code> file without installing it first, by using the <code>PKG_CONFIG_PATH</code> environment variable.</p>
-<div class="fragment"><div class="line">env PKG_CONFIG_PATH=path/to/glfw/src cc $(pkg-config --cflags glfw3) -o myprog myprog.c $(pkg-config --libs glfw3)</div>
+<div class="fragment"><div class="line">env PKG_CONFIG_PATH=path/to/glfw/src cc $(pkg-config --cflags glfw3) -o Vueprog Vueprog.c $(pkg-config --libs glfw3)</div>
 </div><!-- fragment --><p >The dependencies do not include OpenGL, as GLFW loads any OpenGL, OpenGL ES or Vulkan libraries it needs at runtime. If your application calls OpenGL directly, instead of using a modern <a class="el" href="context_guide.html#context_glext_auto">extension loader library</a>, you should add the <code>gl</code> pkg-config package.</p>
-<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3 gl) -o myprog myprog.c $(pkg-config --libs glfw3 gl)</div>
+<div class="fragment"><div class="line">cc $(pkg-config --cflags glfw3 gl) -o Vueprog Vueprog.c $(pkg-config --libs glfw3 gl)</div>
 </div><!-- fragment --><h2><a class="anchor" id="build_link_xcode"></a>
 With Xcode on macOS</h2>
 <p >If you are using the dynamic library version of GLFW, add it to the project dependencies.</p>
@@ -177,7 +177,7 @@ With Xcode on macOS</h2>
 With command-line on macOS</h2>
 <p >It is recommended that you use <a class="el" href="build_guide.html#build_link_pkgconfig">pkg-config</a> when building from the command line on macOS. That way you will get any new dependencies added automatically. If you still wish to build manually, you need to add the required frameworks and libraries to your command-line yourself using the <code>-l</code> and <code>-framework</code> switches.</p>
 <p >If you are using the dynamic GLFW library, which is named <code>libglfw.3.dylib</code>, do:</p>
-<div class="fragment"><div class="line">cc -o myprog myprog.c -lglfw -framework Cocoa -framework OpenGL -framework IOKit</div>
+<div class="fragment"><div class="line">cc -o Vueprog Vueprog.c -lglfw -framework Cocoa -framework OpenGL -framework IOKit</div>
 </div><!-- fragment --><p >If you are using the static library, named <code>libglfw3.a</code>, substitute <code>-lglfw3</code> for <code>-lglfw</code>.</p>
 <p >Note that you do not add the <code>.framework</code> extension to a framework when linking against it from the command-line.</p>
 <dl class="section note"><dt>Note</dt><dd>Your machine may have <code>libGL.*.dylib</code> style OpenGL library, but that is for the X Window System and will not work with the macOS native version of GLFW. </dd></dl>
