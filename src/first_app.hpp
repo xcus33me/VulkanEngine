@@ -16,7 +16,7 @@ namespace vue {
 		VueWindow vueWindow { WIDTH, HEIGHT, "Sandbox" };
 		VueDevice vueDevice {vueWindow};
 		VueSwapChain vueSwapChain{vueDevice, vueWindow.getExtent()};
-		VuePipeline VuePipeline {
+		VuePipeline vuePipeline {
 			vueDevice,
 			"../shaders/simple_shader.vert.spv",
 			"../shaders/simple_shader.frag.spv",
