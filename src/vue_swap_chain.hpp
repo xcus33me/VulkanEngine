@@ -19,7 +19,7 @@ public:
     ~VueSwapChain();
 
     VueSwapChain(const VueSwapChain &) = delete;
-    void operator=(const VueSwapChain &) = delete;
+    VueSwapChain& operator=(const VueSwapChain &) = delete;
 
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
     VkRenderPass getRenderPass() { return renderPass; }

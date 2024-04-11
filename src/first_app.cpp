@@ -5,6 +5,16 @@
 
 namespace vue{
 
+	FirstApp::FirstApp() {
+		createPipelineLayout();
+		createPipeline();
+		createCommandBuffers();
+	}
+
+	FirstApp::~FirstApp() {
+		vkDestroyPipelineLayout(vueDevice.device(), pipelineLayout, nullptr);
+	}
+
 	void FirstApp::run() {
 		while (!this->vueWindow.shouldClose()) {
 			glfwPollEvents();
@@ -25,11 +35,22 @@ namespace vue{
 	}
 	
 	void FirstApp::createPipeline() {
-		auto pipelineConfig = VuePipeline::defaultPipelineConfigInfo(vueSwapChain.width(), vueSwapChain.height());
+		PipelineConfigInfo pipelineConfig{};
+		VuePipeline::defaultPipelineConfigInfo(
+			pipelineConfig, 
+			vueSwapChain.width(),
+			vueSwapChain.height());
 		pipelineConfig.renderPass = vueSwapChain.getRenderPass();
+		pipelineConfig.pipelineLayout = pipelineLayout;
+		vuePipeline = std::make_unique<VuePipeline>(
+			vueDevice,
+			"shaders/simple_shader.vert.spv",
+			"shaders/simple_shader.frag.spv",
+			pipelineConfig
+		);
 	}
 
-	void FirstApp::createCommandBuffer() {
+	void FirstApp::createCommandBuffers() {
 
 	}
 

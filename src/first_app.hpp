@@ -26,7 +26,7 @@ namespace vue {
 	private:
 		void createPipelineLayout();
 		void createPipeline();
-		void createCommandBuffer();
+		void createCommandBuffers();
 		void drawFrame();
 
 		VueWindow vueWindow { WIDTH, HEIGHT, "Sandbox" };

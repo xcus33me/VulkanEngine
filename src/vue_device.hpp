@@ -2,7 +2,7 @@
 
 #include "vue_window.hpp"
 
-// std lib headers
+// std 
 #include <string>
 #include <vector>
 
@@ -35,9 +35,9 @@ class VueDevice {
 
   // Not copyable or movable
   VueDevice(const VueDevice &) = delete;
-  void operator=(const VueDevice &) = delete;
+  VueDevice& operator=(const VueDevice &) = delete;
   VueDevice(VueDevice &&) = delete;
-  VueDevice &operator=(VueDevice &&) = delete;
+  VueDevice& operator=(VueDevice &&) = delete;
 
   VkCommandPool getCommandPool() { return commandPool; }
   VkDevice device() { return device_; }
