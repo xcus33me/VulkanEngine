@@ -1,6 +1,7 @@
 #include "first_app.hpp"
 
 // std
+#include <array>
 #include <stdexcept>
 
 namespace vue{
@@ -51,7 +52,41 @@ namespace vue{
 	}
 
 	void FirstApp::createCommandBuffers() {
+		commandBuffers.resize(vueSwapChain.imageCount());
 
+
+		VkCommandBufferAllocateInfo allocateInfo{};
+		allocateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		allocateInfo.commandPool = vueDevice.getCommandPool();
+		allocateInfo.commandBufferCount = static_cast<uint32_t>(commandBuffers.size());
+
+		if (vkAllocateCommandBuffers(vueDevice.device(), &allocateInfo, commandBuffers.data()) != VK_SUCCESS) {
+			throw std::runtime_error("Failed to allocate command buffers!");
+		}
+
+		for (int i = 0; i < commandBuffers.size(); ++i) {
+			VkCommandBufferBeginInfo beginInfo{};
+			beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+			
+			if (vkBeginCommandBuffer(commandBuffers[i], &beginInfo) != VK_SUCCESS) {
+				throw std::runtime_error("Failed to begin recording command buffer!");
+			}
+
+			VkRenderPassBeginInfo renderPassInfo{};
+			renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+			renderPassInfo.renderPass = vueSwapChain.getRenderPass();
+			renderPassInfo.framebuffer = vueSwapChain.getFrameBuffer(i);
+
+			renderPassInfo.renderArea.offset = {0, 0};
+			renderPassInfo.renderArea.extent = vueSwapChain.getSwapChainExtent();
+
+			std::array<VkClearValue, 2> clearValues{};
+			clearValues[0].color = {0.1f, 0.1f, 0.1f, 1.0f};
+			clearValues[1].depthStencil = {1.0f, 0};
+			renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
+			renderPassInfo.pClearValues = clearValues.data();
+		}		
 	}
 
 	void FirstApp::drawFrame() {
