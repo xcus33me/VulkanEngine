@@ -5,21 +5,35 @@
 #include "vue_window.hpp"
 #include "vue_swap_chain.hpp"
 
+// std
+
+#include <memory>
+
 namespace vue {
 	class FirstApp {
 	public:
 		static constexpr int WIDTH = 1600;
 		static constexpr int HEIGHT = 900;
 
+		FirstApp();
+		~FirstApp();
+
+		FirstApp(const FirstApp&) = delete;
+		FirstApp& operator==(const FirstApp) = delete;
+
 		void run();
+
 	private:
+		void createPipelineLayout();
+		void createPipeline();
+		void createCommandBuffer();
+		void drawFrame();
+
 		VueWindow vueWindow { WIDTH, HEIGHT, "Sandbox" };
 		VueDevice vueDevice {vueWindow};
 		VueSwapChain vueSwapChain{vueDevice, vueWindow.getExtent()};
-		VuePipeline vuePipeline {
-			vueDevice,
-			"../shaders/simple_shader.vert.spv",
-			"../shaders/simple_shader.frag.spv",
-			VuePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
+		std::unique_ptr<VuePipeline> vuePipeline;
+		VkPipelineLayout pipelineLayout;
+		std::vector<VkCommandBuffer> commandBuffers;
 	};
 }
