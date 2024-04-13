@@ -17,7 +17,7 @@ namespace vue {
         const std::string& fragFilepath,
         const PipelineConfigInfo& configInfo)
          : vueDevice{device} {
-            createGraphicsPipelin e(vertFilepath, fragFilepath, configInfo);
+            createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
         }
 
     VuePipeline::~VuePipeline() {
