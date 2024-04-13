@@ -1,9 +1,9 @@
 #include "vue_pipeline.hpp"
 
-#include <fstream>
-#include <exception>
-#include <iostream>
 #include <cassert>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
 
 #ifndef ENGINE_DIR
 #define ENGINE_DIR "../"
@@ -17,7 +17,7 @@ namespace vue {
         const std::string& fragFilepath,
         const PipelineConfigInfo& configInfo)
          : vueDevice{device} {
-            createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
+            createGraphicsPipelin e(vertFilepath, fragFilepath, configInfo);
         }
 
     VuePipeline::~VuePipeline() {
