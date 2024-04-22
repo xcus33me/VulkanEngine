@@ -39,6 +39,7 @@ namespace vue {
             VuePipeline(const VuePipeline&) = delete;
             VuePipeline& operator=(const VuePipeline&) = delete;
 
+            void bind(VkCommandBuffer commandBuffer);
             static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height); 
     
         private:

@@ -19,7 +19,10 @@ namespace vue{
 	void FirstApp::run() {
 		while (!this->vueWindow.shouldClose()) {
 			glfwPollEvents();
+			drawFrame();
 		}
+
+		vkDeviceWaitIdle(vueDevice.device());
 	}
 
 	void FirstApp::createPipelineLayout() {
@@ -86,11 +89,31 @@ namespace vue{
 			clearValues[1].depthStencil = {1.0f, 0};
 			renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
 			renderPassInfo.pClearValues = clearValues.data();
+
+			vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+			vuePipeline->bind(commandBuffers[i]);
+			vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+
+			vkCmdEndRenderPass(commandBuffers[i]);
+			if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS) {
+				throw std::runtime_error("failed to record command buffer!");
+			}
 		}		
 	}
 
 	void FirstApp::drawFrame() {
+		uint32_t imageIndex;
+		auto result = vueSwapChain.acquireNextImage(&imageIndex);
 
+		if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+			throw std::runtime_error("failed to acquire swap chain image!");
+		}
+
+		result = vueSwapChain.submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
+		if (result != VK_SUCCESS) {
+			throw std::runtime_error("Failed to present swap chain image!");
+		}
 	}
 
 }
