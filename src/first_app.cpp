@@ -7,6 +7,7 @@
 namespace vue{
 
 	FirstApp::FirstApp() {
+		loadModels();
 		createPipelineLayout();
 		createPipeline();
 		createCommandBuffers();
@@ -23,6 +24,16 @@ namespace vue{
 		}
 
 		vkDeviceWaitIdle(vueDevice.device());
+	}
+
+	void FirstApp::loadModels() {
+		std::vector<VueModel::Vertex> vertices {
+			{{0.0f, -0.5f}},
+			{{0.5f, 0.5f}},
+			{{-0.5f, 0.5f}}
+		};
+
+		vueModel = std::make_unique<VueModel>(vueDevice, vertices);
 	}
 
 	void FirstApp::createPipelineLayout() {
@@ -93,7 +104,8 @@ namespace vue{
 			vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
 			vuePipeline->bind(commandBuffers[i]);
-			vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+			vueModel->bind(commandBuffers[i]);
+			vueModel->draw(commandBuffers[i]);
 
 			vkCmdEndRenderPass(commandBuffers[i]);
 			if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS) {

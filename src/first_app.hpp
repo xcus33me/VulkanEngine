@@ -2,12 +2,13 @@
 
 #include "vue_device.hpp"
 #include "vue_pipeline.hpp"
-#include "vue_window.hpp"
 #include "vue_swap_chain.hpp"
+#include "vue_window.hpp"
+#include "vue_model.hpp"
 
 // std
-
 #include <memory>
+#include <vector>
 
 namespace vue {
 	class FirstApp {
@@ -24,6 +25,7 @@ namespace vue {
 		void run();
 
 	private:
+		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -35,5 +37,6 @@ namespace vue {
 		std::unique_ptr<VuePipeline> vuePipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
+		std::unique_ptr<VueModel> vueModel;
 	};
 }
